@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - name: pytensor-base
