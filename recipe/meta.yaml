@@ -35,7 +35,7 @@ outputs:
         - pip
         - python
         - cython
-        - numpy >=1.17.0
+        # - numpy >=1.17.0
         - versioneer ==0.28
         - tomli
         - setuptools >=48.0.0
