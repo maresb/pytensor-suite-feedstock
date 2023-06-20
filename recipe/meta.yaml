@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: pytensor-base
@@ -27,7 +27,8 @@ outputs:
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - cython                                 # [build_platform != target_platform]
-        - numpy >=1.17.0                         # [build_platform != target_platform]
+        # Allow numpy pinnings to be managed by conda-forge global dependencies
+        - numpy                                  # [build_platform != target_platform]
         - versioneer ==0.28                      # [build_platform != target_platform]
         - tomli                                  # [build_platform != target_platform]
         - setuptools >=48.0.0                    # [build_platform != target_platform]
@@ -35,14 +36,17 @@ outputs:
         - pip
         - python
         - cython
-        - numpy >=1.17.0
+        # Allow numpy pinnings to be managed by conda-forge global dependencies
+        - numpy
         - versioneer ==0.28
         - tomli
         - setuptools >=48.0.0
       run:
         - python
         # Ref: <https://github.com/pymc-devs/pytensor/blob/rel-{{ version }}/setup.py>
-        - numpy >=1.17.0
+        # numpy global dependency is greater than 1.17 on conda-forge
+        # so let conda-forge manage it.
+        - numpy
         - scipy >=0.14
         - filelock
         - etuples
