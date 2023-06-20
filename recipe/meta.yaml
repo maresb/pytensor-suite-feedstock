@@ -46,7 +46,7 @@ outputs:
         # Ref: <https://github.com/pymc-devs/pytensor/blob/rel-{{ version }}/setup.py>
         # numpy global dependency is greater than 1.17 on conda-forge
         # so let conda-forge manage it.
-        - numpy
+        - {{ pin_compatible("numpy") }}
         - scipy >=0.14
         - filelock
         - etuples
