@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 1
+  number: 2
 
 outputs:
   - name: pytensor-base
@@ -92,9 +92,10 @@ outputs:
         # <https://github.com/conda-forge/libpython-feedstock/blob/main/recipe/bld.bat>
         - libpython >=2.2  # [win]
 
-        # Use openblas on Apple M1. For everything else, use mkl-service.
-        - openblas  # [arm64]
-        - mkl-service  # [not arm64]
+        # mkl-service is only available for linux-64, win-64, and osx-64.
+        # For everything else, use openblas.
+        - mkl-service  # [linux64 or win64 or (osx and not arm64)]
+        - openblas  # [not (linux64 or win64 or (osx and not arm64))]
         # For some reason we also need the "blas" package. Otherwise we get reports
         # of "cblas.h: No such file or directory" at import time.
         # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
