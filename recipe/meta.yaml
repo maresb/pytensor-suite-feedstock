@@ -83,6 +83,7 @@ outputs:
         - {{ pin_subpackage('pytensor-base', exact=True) }}
         - {{ compiler('c') }}  # [not win]
         - {{ compiler('cxx') }}  # [not win]
+        - gxx  # [linux]
         - {{ compiler('m2w64_c') }}  # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
