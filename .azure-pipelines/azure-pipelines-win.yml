@@ -8,30 +8,30 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_numpy1.21python3.10.____cpython:
-        CONFIG: win_64_numpy1.21python3.10.____cpython
+      win_64_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: win_64_numpy1.21python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.21python3.10.____cpython
-      win_64_numpy1.21python3.8.____73_pypy:
-        CONFIG: win_64_numpy1.21python3.8.____73_pypy
+        SHORT_CONFIG: win_64_numpy1.21python3.10.____cpyt_hb07ed7ccda
+      win_64_numpy1.21python3.8.____73_pypypython_implpypy:
+        CONFIG: win_64_numpy1.21python3.8.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.21python3.8.____73_pypy
-      win_64_numpy1.21python3.8.____cpython:
-        CONFIG: win_64_numpy1.21python3.8.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.8.____73_py_heaf210a126
+      win_64_numpy1.21python3.8.____cpythonpython_implcpython:
+        CONFIG: win_64_numpy1.21python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.21python3.8.____cpython
-      win_64_numpy1.21python3.9.____73_pypy:
-        CONFIG: win_64_numpy1.21python3.9.____73_pypy
+        SHORT_CONFIG: win_64_numpy1.21python3.8.____cpyth_h58e966f8a4
+      win_64_numpy1.21python3.9.____73_pypypython_implpypy:
+        CONFIG: win_64_numpy1.21python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.21python3.9.____73_pypy
-      win_64_numpy1.21python3.9.____cpython:
-        CONFIG: win_64_numpy1.21python3.9.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.9.____73_py_h487ae0b195
+      win_64_numpy1.21python3.9.____cpythonpython_implcpython:
+        CONFIG: win_64_numpy1.21python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.21python3.9.____cpython
-      win_64_numpy1.23python3.11.____cpython:
-        CONFIG: win_64_numpy1.23python3.11.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.9.____cpyth_h1ac5a94a9d
+      win_64_numpy1.23python3.11.____cpythonpython_implcpython:
+        CONFIG: win_64_numpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_numpy1.23python3.11.____cpython
+        SHORT_CONFIG: win_64_numpy1.23python3.11.____cpyt_hfdca1d6b56
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\
