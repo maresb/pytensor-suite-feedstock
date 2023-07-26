@@ -12,9 +12,7 @@ source:
 
 build:
   number: 0
-  # I don't understand why pypy 3.8 fails on aarch64, and it's
-  # not worth the effort to understand why.
-  skip: true  # [aarch64 and (python_impl == 'pypy') and (py==38)]
+  skip: true  # [py<39]
 
 outputs:
   - name: pytensor-base
