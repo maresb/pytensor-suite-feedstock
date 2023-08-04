@@ -1,4 +1,4 @@
-{% set version = "2.14.1" %}
+{% set version = "2.14.2" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: 4d20c3a19caa6f67d8cc2b8d97e063af2cb74d36f94d5de96d976a5a0e8beeb2
+  sha256: dbafae9ce4264e0e5d1e02b2214da3187ca51e99f43a1a2245e5c0d839cf3dfa
   patches:
 
 build:
@@ -26,36 +26,33 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - python                                 # [build_platform != target_platform]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - setuptools >=48.0.0                    # [build_platform != target_platform]
         - cython                                 # [build_platform != target_platform]
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         - numpy                                  # [build_platform != target_platform]
         - versioneer ==0.28                      # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - tomli                                  # [build_platform != target_platform]
-        - setuptools >=48.0.0                    # [build_platform != target_platform]
       host:
-        - pip
         - python
+        - setuptools >=48.0.0
         - cython
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         - numpy
         - versioneer ==0.28
+        - pip
         - tomli
-        - setuptools >=48.0.0
       run:
         - python
-        # Ref: <https://github.com/pymc-devs/pytensor/blob/rel-{{ version }}/setup.py>
-        # numpy global dependency is greater than 1.17 on conda-forge
-        # so let conda-forge manage it.
-        - {{ pin_compatible("numpy") }}
+        - setuptools >=48.0.0
         - scipy >=0.14
         - filelock
         - etuples
         - logical-unification
-        - miniKanren
+        - minikanren
         - cons
         - typing_extensions
-        - setuptools >=48.0.0
+        - {{ pin_compatible("numpy") }}
     test:
       imports:
         - pytensor
