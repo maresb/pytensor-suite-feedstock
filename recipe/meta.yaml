@@ -53,6 +53,9 @@ outputs:
         - cons
         - typing_extensions
         - {{ pin_compatible("numpy") }}
+        # Add a pin to avoid <https://github.com/pymc-devs/pytensor/issues/441>
+        - numpy <1.26
+
     test:
       imports:
         - pytensor
