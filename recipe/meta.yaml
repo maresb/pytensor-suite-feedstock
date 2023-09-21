@@ -12,7 +12,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [(py<39) or (win and (python_impl == 'pypy'))]
+  skip: true  # [(py<39) or ((win or aarch64) and (python_impl == 'pypy'))]
 
 outputs:
   - name: pytensor-base
