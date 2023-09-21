@@ -38,16 +38,11 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
         SHORT_CONFIG: linux_aarch64_numpy1.22python3.10.__hfef8627d55
-      linux_aarch64_numpy1.22python3.8.____cpythonpython_implcpython:
-        CONFIG: linux_aarch64_numpy1.22python3.8.____cpythonpython_implcpython
+      linux_aarch64_numpy1.22python3.8.____cpythonpython_implpypy:
+        CONFIG: linux_aarch64_numpy1.22python3.8.____cpythonpython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.8.___hf1e1cf5873
-      linux_aarch64_numpy1.22python3.9.____73_pypypython_implpypy:
-        CONFIG: linux_aarch64_numpy1.22python3.9.____73_pypypython_implpypy
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.9.___h7c5237695a
+        SHORT_CONFIG: linux_aarch64_numpy1.22python3.8.___hf9bf4912c8
       linux_aarch64_numpy1.22python3.9.____cpythonpython_implcpython:
         CONFIG: linux_aarch64_numpy1.22python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
