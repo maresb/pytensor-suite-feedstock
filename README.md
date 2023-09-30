@@ -178,17 +178,17 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_numpy1.22python3.9.____cpythonpython_implcpython</td>
+              <td>win_64_numpy1.22python3.9.____cpythonpython_implpypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_numpy1.22python3.9.____cpythonpython_implcpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_numpy1.22python3.9.____cpythonpython_implpypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_numpy1.23python3.11.____cpythonpython_implpypy</td>
+              <td>win_64_numpy1.23python3.11.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_numpy1.23python3.11.____cpythonpython_implpypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_numpy1.23python3.11.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr>
