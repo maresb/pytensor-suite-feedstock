@@ -95,9 +95,11 @@ outputs:
         - libpython >=2.2  # [win]
 
         # mkl-service is only available for linux-64, win-64, and osx-64.
+        # Use accelerate for osx-arm64.
         # For everything else, use openblas.
         - mkl-service  # [linux64 or win64 or (osx and not arm64)]
-        - openblas  # [not (linux64 or win64 or (osx and not arm64))]
+        - accelerate  # [osx and arm64]
+        - openblas  # [not (linux64 or win64 or osx)]
         # For some reason we also need the "blas" package. Otherwise we get reports
         # of "cblas.h: No such file or directory" at import time.
         # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
