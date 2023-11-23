@@ -111,6 +111,8 @@ outputs:
       commands:
         - pytensor-cache help
         - pip check
+        - python -c "import pytensor; print(pytensor.config.blas__ldflags)"
+        - python -c "import pytensor; print(pytensor.config)"
         - python check-for-warnings.py allowed-warnings-main.txt
       requires:
         - pip
