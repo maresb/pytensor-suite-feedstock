@@ -1,4 +1,4 @@
-{% set version = "2.17.3" %}
+{% set version = "2.18.1" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: e697fdca3f41bb4c4e4696ef8a7e5b4fe992db0a643d2b161e5f0458ae23ab46
+  sha256: 9681f035401b024c625fb97c494d2817b62af057ebd522de0daead1e627b4cf2
   patches:
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [(py<39) or (aarch64 and (python_impl == 'pypy'))]
 
 outputs:
   - name: pytensor-base
@@ -53,8 +53,6 @@ outputs:
         - cons
         - typing_extensions
         - {{ pin_compatible("numpy") }}
-        # Add a pin to avoid <https://github.com/pymc-devs/pytensor/issues/441>
-        - numpy <1.26
 
     test:
       imports:
@@ -62,6 +60,7 @@ outputs:
       commands:
         - pytensor-cache help
         - pip check
+        - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
         - python check-for-warnings.py allowed-warnings-base.txt
       requires:
         - pip
@@ -111,6 +110,8 @@ outputs:
       commands:
         - pytensor-cache help
         - pip check
+        - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
+        - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
         - python check-for-warnings.py allowed-warnings-main.txt
       requires:
         - pip

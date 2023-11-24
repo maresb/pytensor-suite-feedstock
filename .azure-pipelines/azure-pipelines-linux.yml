@@ -8,56 +8,51 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_numpy1.22python3.10.____cpython:
-        CONFIG: linux_64_numpy1.22python3.10.____cpython
+      linux_64_numpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_numpy1.22python3.10.____cpython
-      linux_64_numpy1.22python3.8.____cpython:
-        CONFIG: linux_64_numpy1.22python3.8.____cpython
+        SHORT_CONFIG: linux_64_numpy1.22python3.10.____cp_hb876ddec32
+      linux_64_numpy1.22python3.8.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.22python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_numpy1.22python3.8.____cpython
-      linux_64_numpy1.22python3.9.____73_pypy:
-        CONFIG: linux_64_numpy1.22python3.9.____73_pypy
+        SHORT_CONFIG: linux_64_numpy1.22python3.8.____cpy_h259db29771
+      linux_64_numpy1.22python3.9.____73_pypypython_implpypy:
+        CONFIG: linux_64_numpy1.22python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_numpy1.22python3.9.____73_pypy
-      linux_64_numpy1.22python3.9.____cpython:
-        CONFIG: linux_64_numpy1.22python3.9.____cpython
+        SHORT_CONFIG: linux_64_numpy1.22python3.9.____73__h99ea93dc8d
+      linux_64_numpy1.22python3.9.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.22python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_numpy1.22python3.9.____cpython
-      linux_64_numpy1.23python3.11.____cpython:
-        CONFIG: linux_64_numpy1.23python3.11.____cpython
+        SHORT_CONFIG: linux_64_numpy1.22python3.9.____cpy_h0a2b3bd23a
+      linux_64_numpy1.23python3.11.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_numpy1.23python3.11.____cpython
-      linux_aarch64_numpy1.22python3.10.____cpython:
-        CONFIG: linux_aarch64_numpy1.22python3.10.____cpython
+        SHORT_CONFIG: linux_64_numpy1.23python3.11.____cp_h28e7358e74
+      linux_aarch64_numpy1.22python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.22python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.10.____cpython
-      linux_aarch64_numpy1.22python3.8.____cpython:
-        CONFIG: linux_aarch64_numpy1.22python3.8.____cpython
+        SHORT_CONFIG: linux_aarch64_numpy1.22python3.10.__hfef8627d55
+      linux_aarch64_numpy1.22python3.8.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.22python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.8.____cpython
-      linux_aarch64_numpy1.22python3.9.____73_pypy:
-        CONFIG: linux_aarch64_numpy1.22python3.9.____73_pypy
+        SHORT_CONFIG: linux_aarch64_numpy1.22python3.8.___hf1e1cf5873
+      linux_aarch64_numpy1.22python3.9.____cpythonpython_implpypy:
+        CONFIG: linux_aarch64_numpy1.22python3.9.____cpythonpython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.9.____73_pypy
-      linux_aarch64_numpy1.22python3.9.____cpython:
-        CONFIG: linux_aarch64_numpy1.22python3.9.____cpython
+        SHORT_CONFIG: linux_aarch64_numpy1.22python3.9.___hfb96fafb35
+      linux_aarch64_numpy1.23python3.11.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.23python3.11.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.22python3.9.____cpython
-      linux_aarch64_numpy1.23python3.11.____cpython:
-        CONFIG: linux_aarch64_numpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_aarch64_numpy1.23python3.11.____cpython
+        SHORT_CONFIG: linux_aarch64_numpy1.23python3.11.__hd10399580a
   timeoutInMinutes: 360
 
   steps:
@@ -71,6 +66,9 @@ jobs:
 
   - script: |
         export CI=azure
+        export flow_run_id=azure_$(Build.BuildNumber).$(System.JobAttempt)
+        export remote_url=$(Build.Repository.Uri)
+        export sha=$(Build.SourceVersion)
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
         if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
