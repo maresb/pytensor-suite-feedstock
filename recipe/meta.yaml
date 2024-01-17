@@ -12,11 +12,12 @@ source:
 
 build:
   number: 0
-  skip: true  # [(py<39) or (aarch64 and (python_impl == 'pypy'))]
 
 outputs:
   - name: pytensor-base
     build:
+      # NOTE: Keep this line synchronized with the identical one below.
+      skip: true  # [(py<39) or (aarch64 and (python_impl == 'pypy'))]
       script:
         - python -m pip install . --no-deps -vv
       entry_points:
@@ -70,6 +71,8 @@ outputs:
 
   - name: pytensor
     build:
+      # NOTE: Keep this line synchronized with the identical one above.
+      skip: true  # [(py<39) or (aarch64 and (python_impl == 'pypy'))]
       script:
         - echo "Nothing to build here, just add dependencies."
     requirements:
