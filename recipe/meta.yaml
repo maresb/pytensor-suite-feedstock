@@ -1,4 +1,4 @@
-{% set version = "2.19.0" %}
+{% set version = "2.20.0" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: 9e070528d12bee85f7fe68ce63b57a253c88d3e155a7415d9805c5b999dfa72b
+  sha256: d88a5c84d04366d5224b5705a9d0daab7d9b0b84ed43c76fc9aae7760fe3eac2
   patches:
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: pytensor-base
