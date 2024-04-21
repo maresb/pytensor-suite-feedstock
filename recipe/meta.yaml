@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: pytensor-base
@@ -21,7 +21,7 @@ outputs:
       script:
         - python -m pip install . --no-deps -vv
       entry_points:
-        - pytensor-cache = bin.pytensor_cache:main
+        - pytensor-cache = pytensor.bin.pytensor_cache:main
     requirements:
       build:
         - {{ compiler('c') }}
