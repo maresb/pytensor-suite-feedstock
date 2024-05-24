@@ -1,4 +1,4 @@
-{% set version = "2.21.0" %}
+{% set version = "2.22.0" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: 3b17f47c034540fe39239b0488bb7dc5e72fbbad92765a80bcace0e51cd1c430
+  sha256: d39c15dd75ca2b560a72849372e0d731fb5f7b10b139c1de112cf0ea2183078a
   patches:
 
 build:
@@ -25,6 +25,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - python                                 # [build_platform != target_platform]
         - setuptools >=48.0.0                    # [build_platform != target_platform]
@@ -91,9 +92,11 @@ outputs:
         - python
         - {{ pin_subpackage('pytensor-base', exact=True) }}
         - {{ compiler('c') }}  # [not win]
+        - {{ stdlib("c") }}    # [not win]
         - {{ compiler('cxx') }}  # [not win]
         - gxx  # [linux]
         - {{ compiler('m2w64_c') }}  # [win]
+        - {{ stdlib("m2w64_c") }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
         - m2w64-toolchain  # [win]
