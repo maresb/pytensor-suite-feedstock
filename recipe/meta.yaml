@@ -83,9 +83,6 @@ outputs:
       script:
         - echo "Nothing to build here, just add dependencies."
     requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
       host:
         - python
       run:
