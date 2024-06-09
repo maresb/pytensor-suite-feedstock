@@ -59,7 +59,6 @@ outputs:
         - logical-unification
         - minikanren
         - cons
-        - typing_extensions
         - {{ pin_compatible("numpy") }}
 
     test:
