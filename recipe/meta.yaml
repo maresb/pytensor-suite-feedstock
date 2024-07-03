@@ -1,4 +1,4 @@
-{% set version = "2.23.0" %}
+{% set version = "2.24.0" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: eb5850ddae5670f1699526de6397a9b3a0a0a71e792c3250e19dabe45d54bfa9
+  sha256: b5834e49008d719b1f9968d7b09e8cb3e38dc19a0be8d7c27943560eabec0a66
   patches:
 
 build:
@@ -28,7 +28,7 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - python                                 # [build_platform != target_platform]
-        - setuptools >=48.0.0                    # [build_platform != target_platform]
+        - setuptools >=59.0.0                    # [build_platform != target_platform]
         - cython                                 # [build_platform != target_platform]
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
@@ -40,7 +40,7 @@ outputs:
         - ninja                                  # [aarch64 and (python_impl == 'pypy')]
       host:
         - python
-        - setuptools >=48.0.0
+        - setuptools >=59.0.0
         - cython
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
@@ -53,13 +53,12 @@ outputs:
       run:
         - python
         - setuptools >=48.0.0
-        - scipy >=0.14
+        - scipy >=0.14,<1.14
         - filelock
         - etuples
         - logical-unification
         - minikanren
         - cons
-        - typing_extensions
         - {{ pin_compatible("numpy") }}
 
     test:
