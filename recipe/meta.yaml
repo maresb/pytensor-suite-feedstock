@@ -1,4 +1,4 @@
-{% set version = "2.24.1" %}
+{% set version = "2.24.2" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: 6c785d77bf4c8659298ddda7b1f87ceaa00c1f897a87e58351ecd88b3a122485
+  sha256: f7e7aeaf1b3966d0af2c78822a18429199557145566804a68ff41a4288ca0974
   patches:
 
 build:
@@ -52,7 +52,7 @@ outputs:
         - ninja                                  # [aarch64 and (python_impl == 'pypy')]
       run:
         - python
-        - setuptools >=48.0.0
+        - setuptools >=59.0.0
         - scipy >=0.14,<1.14
         - filelock
         - etuples
