@@ -52,7 +52,7 @@ outputs:
         - ninja                                  # [aarch64 and (python_impl == 'pypy')]
       run:
         - python
-        - setuptools >=48.0.0
+        - setuptools >=59.0.0
         - scipy >=0.14,<1.14
         - filelock
         - etuples
