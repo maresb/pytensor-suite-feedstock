@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: pytensor-base
@@ -54,12 +54,12 @@ outputs:
         - python
         - setuptools >=59.0.0
         - scipy >=0.14,<1.14
-        - filelock
+        - filelock >=3.15
         - etuples
         - logical-unification
         - minikanren
         - cons
-        - {{ pin_compatible("numpy") }}
+        - {{ pin_compatible('numpy') }}
 
     test:
       imports:
@@ -92,7 +92,7 @@ outputs:
         - {{ compiler('cxx') }}  # [not win]
         - gxx  # [linux]
         - {{ compiler('m2w64_c') }}  # [win]
-        - {{ stdlib("m2w64_c") }}    # [win]
+        - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
         - m2w64-toolchain  # [win]
