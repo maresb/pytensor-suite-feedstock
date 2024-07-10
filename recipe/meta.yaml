@@ -59,7 +59,7 @@ outputs:
         - logical-unification
         - minikanren
         - cons
-        - {{ pin_compatible("numpy") }}
+        - {{ pin_compatible('numpy') }}
 
     test:
       imports:
@@ -92,7 +92,7 @@ outputs:
         - {{ compiler('cxx') }}  # [not win]
         - gxx  # [linux]
         - {{ compiler('m2w64_c') }}  # [win]
-        - {{ stdlib("m2w64_c") }}    # [win]
+        - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
         - m2w64-toolchain  # [win]
