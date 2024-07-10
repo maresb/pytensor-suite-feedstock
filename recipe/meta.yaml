@@ -54,7 +54,7 @@ outputs:
         - python
         - setuptools >=59.0.0
         - scipy >=0.14,<1.14
-        - filelock
+        - filelock >=3.15
         - etuples
         - logical-unification
         - minikanren
