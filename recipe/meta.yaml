@@ -1,4 +1,4 @@
-{% set version = "2.25.2" %}
+{% set version = "2.25.3" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: bf181c8c40543498991fa818450cba2b778ba19732b13b2d21882317d97ca038
+  sha256: 7ad8dcecc5f99bb0c3eaf559cc1ab69af2187bf33694a71c37940d3df9be568f
   patches:
 
 build:
@@ -34,7 +34,7 @@ outputs:
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
         - numpy                                  # [build_platform != target_platform]
         - numpy <2.0a0                           # [build_platform != target_platform]
-        - versioneer ==0.28                      # [build_platform != target_platform]
+        - versioneer ==0.29                      # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - tomli                                  # [build_platform != target_platform]
         - ninja                                  # [aarch64 and (python_impl == 'pypy')]
@@ -46,14 +46,14 @@ outputs:
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
         - numpy
         - numpy <2.0a0
-        - versioneer ==0.28
+        - versioneer ==0.29
         - pip
         - tomli
         - ninja                                  # [aarch64 and (python_impl == 'pypy')]
       run:
         - python
         - setuptools >=59.0.0
-        - scipy >=0.14,<1.14
+        - scipy >=1,<2
         - filelock >=3.15
         - etuples
         - logical-unification
