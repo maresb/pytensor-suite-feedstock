@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: pytensor-base
@@ -55,7 +55,6 @@ outputs:
         - logical-unification
         - minikanren
         - cons
-        - {{ pin_compatible('numpy') }}
 
     test:
       imports:
