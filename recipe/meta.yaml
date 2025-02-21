@@ -1,4 +1,4 @@
-{% set version = "2.27.1" %}
+{% set version = "2.28.0" %}
 
 package:
   # https://github.com/conda/conda-build/issues/3933
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
-  sha256: ed5075e1504e0e4c2322340111289820c5e1718b70187922777d560a8ef26f75
+  sha256: cb759c6c91b11d1ba3dd647549e72dd903ea9bff58deec34d02b1814e99ea7ca
   patches:
 
 build:
@@ -33,7 +33,6 @@ outputs:
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
         - numpy                                  # [build_platform != target_platform]
-        - numpy <2.0a0                           # [build_platform != target_platform]
         - versioneer ==0.29                      # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - tomli                                  # [build_platform != target_platform]
@@ -44,7 +43,6 @@ outputs:
         # Allow numpy pinnings to be managed by conda-forge global dependencies
         # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
         - numpy
-        - numpy <2.0a0
         - versioneer ==0.29
         - pip
         - tomli
@@ -88,16 +86,10 @@ outputs:
         - {{ compiler('c') }}  # [not win]
         - {{ stdlib("c") }}    # [not win]
         - {{ compiler('cxx') }}  # [not win]
-        - gxx  # [linux]
+        - gxx  # [linux or win]
         - {{ compiler('m2w64_c') }}  # [win]
         - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
-
-        - m2w64-toolchain  # [win]
-        # The libpython conda-forge package seems to be a wrapper package
-        # which configures m2w64-toolchain for Python.
-        # <https://github.com/conda-forge/libpython-feedstock/blob/main/recipe/bld.bat>
-        - libpython >=2.2  # [win]
 
         # mkl-service is only available for linux-64, win-64, and osx-64.
         # Use accelerate for osx-arm64.
