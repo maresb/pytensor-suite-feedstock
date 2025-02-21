@@ -11,7 +11,7 @@ source:
   patches:
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: pytensor-base
@@ -50,12 +50,12 @@ outputs:
         - python
         - setuptools >=59.0.0
         - scipy >=1,<2
+        - numpy >=1.17.0
         - filelock >=3.15
         - etuples
         - logical-unification
         - minikanren
         - cons
-        - {{ pin_compatible('numpy') }}
 
     test:
       imports:
