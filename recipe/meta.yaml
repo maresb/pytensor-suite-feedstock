@@ -91,11 +91,6 @@ outputs:
         - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
-        # The libpython conda-forge package seems to be a wrapper package
-        # which configures m2w64-toolchain for Python.
-        # <https://github.com/conda-forge/libpython-feedstock/blob/main/recipe/bld.bat>
-        - libpython >=2.2  # [win]
-
         # mkl-service is only available for linux-64, win-64, and osx-64.
         # Use accelerate for osx-arm64.
         # For everything else, use openblas.
