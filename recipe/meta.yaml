@@ -91,7 +91,6 @@ outputs:
         - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
 
-        - m2w64-toolchain  # [win]
         # The libpython conda-forge package seems to be a wrapper package
         # which configures m2w64-toolchain for Python.
         # <https://github.com/conda-forge/libpython-feedstock/blob/main/recipe/bld.bat>
