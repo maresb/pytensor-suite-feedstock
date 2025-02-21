@@ -86,7 +86,7 @@ outputs:
         - {{ compiler('c') }}  # [not win]
         - {{ stdlib("c") }}    # [not win]
         - {{ compiler('cxx') }}  # [not win]
-        - gxx  # [linux]
+        - gxx  # [linux or win]
         - {{ compiler('m2w64_c') }}  # [win]
         - {{ stdlib('m2w64_c') }}    # [win]
         - {{ compiler('m2w64_cxx') }}  # [win]
