@@ -12,12 +12,11 @@ source:
 
 build:
   number: 0
+  skip: true  # [py<310 or (osx and (not arm64) and py==313)]
 
 outputs:
   - name: pytensor-base
     build:
-      # NOTE: Keep this line synchronized with the identical one below.
-      skip: true  # [py<310 or (osx and (not arm64) and py==311)]
       script:
         - python -m pip install . --no-deps -vv
       entry_points:
@@ -73,8 +72,6 @@ outputs:
 
   - name: pytensor
     build:
-      # NOTE: Keep this line synchronized with the identical one above.
-      skip: true  # [py<310 or (osx and (not arm64) and py==311)]
       script:
         - echo "Nothing to build here, just add dependencies."
     requirements:
