@@ -113,11 +113,11 @@ outputs:
         - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
         - python check-for-warnings.py allowed-warnings-main.txt
         - python test-cger.py
-        - conda create -n before -f before.yml
+        - conda env create -n before -f before.yml
         - conda activate before
         - python test-cger.py
         - conda deactivate
-        - conda create -n after -f after.yml
+        - conda env create -n after -f after.yml
         - conda activate after
         - python test-cger.py
         - conda deactivate
