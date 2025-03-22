@@ -12,6 +12,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [(not osx) or arm64]
 
 outputs:
   - name: pytensor-base
@@ -112,13 +113,22 @@ outputs:
         - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
         - python check-for-warnings.py allowed-warnings-main.txt
         - python test-cger.py
+        - conda create -n before -f before.yml
+        - conda activate before
+        - python test-cger.py
+        - conda deactivate
+        - conda create -n after -f after.yml
+        - conda activate after
+        - python test-cger.py
+        - conda deactivate
       requires:
         - pip
       files:
         - check-for-warnings.py
         - allowed-warnings-main.txt
         - test-cger.py
-
+        - before.yml
+        - after.yml
 about:
   home: https://github.com/pymc-devs/pytensor
   license: BSD-3-Clause
