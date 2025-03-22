@@ -20,7 +20,7 @@ outputs:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.13") or arm64 or (not osx)
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +82,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.13") or arm64 or (not osx)
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
@@ -125,6 +125,9 @@ outputs:
           recipe:
             - check-for-warnings.py
             - allowed-warnings-main.txt
+            - before.yml
+            - after.yml
+            - test-cger.py
         requirements:
           run:
             - pip
@@ -134,6 +137,11 @@ outputs:
           - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
           - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
           - python check-for-warnings.py allowed-warnings-main.txt
+          - python test-cger.py
+          - conda env create -n before -f before.yml
+          - conda run -n before python test-cger.py
+          - conda env create -n after -f after.yml
+          - conda run -n after python test-cger.py
 
 about:
   license: BSD-3-Clause
