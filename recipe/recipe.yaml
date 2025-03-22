@@ -1,0 +1,151 @@
+schema_version: 1
+
+context:
+  version: 2.29.0
+
+recipe:
+  # https://github.com/conda/conda-build/issues/3933
+  name: pytensor-suite
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pytensor/pytensor-${{ version }}.tar.gz
+  sha256: 851c5d738661e81f6de5ae4a950131e35a3da52a0b1437bc2e414befc059e86a
+
+build:
+  number: 1
+
+outputs:
+  - package:
+      name: pytensor-base
+    build:
+      # NOTE: Keep this line synchronized with the identical one below.
+      skip: match(python, "<3.10")
+      script:
+        - python -m pip install . --no-deps -vv
+      python:
+        entry_points:
+          - pytensor-cache = pytensor.bin.pytensor_cache:main
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler('cxx') }}
+        - if: build_platform != target_platform
+          then:
+            - python
+            - setuptools >=59.0.0
+            - cython
+            # Allow numpy pinnings to be managed by conda-forge global dependencies
+            # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
+            - numpy
+            - versioneer ==0.29
+            - cross-python_${{ target_platform }}
+            - tomli
+      host:
+        - python
+        - setuptools >=59.0.0
+        - cython
+        # Allow numpy pinnings to be managed by conda-forge global dependencies
+        # See also <https://matrix.to/#/!SOyumkgPRWoXfQYIFH:matrix.org/$17156774815028VNLdj:matrix.org?via=matrix.org&via=gitter.im&via=salt-rock-lamp.ems.host>
+        - numpy
+        - versioneer ==0.29
+        - pip
+        - tomli
+      run:
+        - python
+        - setuptools >=59.0.0
+        - scipy >=1,<2
+        - numpy >=1.17.0
+        - filelock >=3.15
+        - etuples
+        - logical-unification
+        - minikanren
+        - cons
+    tests:
+      - python:
+          imports:
+            - pytensor
+      - files:
+          recipe:
+            - check-for-warnings.py
+            - allowed-warnings-base.txt
+        requirements:
+          run:
+            - pip
+        script:
+          - pytensor-cache help
+          - pip check
+          - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
+          - python check-for-warnings.py allowed-warnings-base.txt
+  - package:
+      name: pytensor
+    build:
+      # NOTE: Keep this line synchronized with the identical one above.
+      skip: match(python, "<3.10")
+      script:
+        - "echo \"Nothing to build here, just add dependencies.\""
+    requirements:
+      host:
+        - python
+      run:
+        - python
+        - ${{ pin_subpackage('pytensor-base', exact=True) }}
+        - if: linux or win
+          then: gxx
+        - if: win
+          then:
+            - ${{ compiler('m2w64_c') }}
+            - ${{ stdlib('m2w64_c') }}
+            - ${{ compiler('m2w64_cxx') }}
+          else:
+            - ${{ compiler('c') }}
+            - ${{ stdlib("c") }}
+            - ${{ compiler('cxx') }}
+
+        # mkl-service is only available for linux-64, win-64, and osx-64.
+        # Use accelerate for osx-arm64.
+        # For everything else, use openblas.
+        - if: (linux and x86_64) or win or (osx and not arm64)
+          then: mkl-service
+        - if: osx and arm64
+          then: accelerate
+        - if: not ((linux and x86_64) or win or osx)
+          then: openblas
+        # For some reason we also need the "blas" package. Otherwise we get reports
+        # of "cblas.h: No such file or directory" at import time.
+        # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
+        - blas
+    tests:
+      - python:
+          imports:
+            - pytensor
+            - pytensor.configdefaults
+      - files:
+          recipe:
+            - check-for-warnings.py
+            - allowed-warnings-main.txt
+        requirements:
+          run:
+            - pip
+        script:
+          - pytensor-cache help
+          - pip check
+          - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
+          - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
+          - python check-for-warnings.py allowed-warnings-main.txt
+
+about:
+  license: BSD-3-Clause
+  summary: An optimizing compiler for evaluating mathematical expressions.
+  license_file: LICENSE.txt
+  homepage: https://github.com/pymc-devs/pytensor
+  repository: https://github.com/pymc-devs/pytensor/
+  documentation: https://pytensor.readthedocs.io/en/latest/
+
+extra:
+  recipe-maintainers:
+    - aseyboldt
+    - maresb
+    - michaelosthege
+    - twiecki
