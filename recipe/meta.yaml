@@ -114,13 +114,9 @@ outputs:
         - python check-for-warnings.py allowed-warnings-main.txt
         - python test-cger.py
         - conda env create -n before -f before.yml
-        - conda activate before
-        - python test-cger.py
-        - conda deactivate
+        - conda run -n before python test-cger.py
         - conda env create -n after -f after.yml
-        - conda activate after
-        - python test-cger.py
-        - conda deactivate
+        - conda run -n after python test-cger.py
       requires:
         - pip
       files:
