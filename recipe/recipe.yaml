@@ -116,6 +116,16 @@ outputs:
         # of "cblas.h: No such file or directory" at import time.
         # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
         - blas
+      run_constraints:
+        - if: win
+          then:
+            # The libstdc++.dll provided in libstdcxx v15.1.0 build h904f734_2
+            # is missing `_ZSt21ios_base_library_initv`. Adding this prevents
+            # libstdcxx v15.1.0 from being installed, without actually adding
+            # libstdcxx as a requirement.
+            # Currently tracking this issue in
+            # <https://github.com/pymc-devs/pytensor/issues/1398>
+            - libstdcxx !=15.1.0
     tests:
       - python:
           imports:
