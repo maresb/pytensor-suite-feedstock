@@ -60,7 +60,7 @@ outputs:
         - filelock >=3.15
         - etuples
         - logical-unification
-        - minikanren
+        - minikanren !=1.0.4
         - cons
     tests:
       - python:
