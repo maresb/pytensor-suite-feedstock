@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.31.5"
+  version: "2.31.6"
 
 recipe:
   # https://github.com/conda/conda-build/issues/3933
@@ -10,7 +10,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pytensor/pytensor-${{ version }}.tar.gz
-  sha256: 25b2d6a38da9c2ccd4c6990712c7f823b98fcfe89c554f58a9d3d86fa0abbf9b
+  sha256: df3c11d097d5a25fff726068b907e1f56d30c211e4460d0a1445ab3f549a1201
 
 build:
   number: 0
@@ -60,7 +60,7 @@ outputs:
         - filelock >=3.15
         - etuples
         - logical-unification
-        - minikanren !=1.0.4
+        - minikanren
         - cons
     tests:
       - python:
