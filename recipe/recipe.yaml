@@ -103,6 +103,12 @@ outputs:
             - ${{ stdlib("c") }}
             - ${{ compiler('cxx') }}
 
+        # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
+        - if: osx
+          then:
+            # This is provided by c-compiler, but not compiler('c').
+            - ld64
+
         # mkl-service is only available for linux-64, win-64, and osx-64.
         # Use accelerate for osx-arm64.
         # For everything else, use openblas.
