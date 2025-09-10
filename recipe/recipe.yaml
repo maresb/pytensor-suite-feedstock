@@ -150,6 +150,9 @@ outputs:
           - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
           - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
           - python check-for-warnings.py allowed-warnings-main.txt
+          # Test for macOS 15.4
+          # <https://github.com/pymc-devs/pytensor/issues/1342#issuecomment-3242864770>
+          - python -c "import pytensor.tensor as pt; print(pt.sum([1, 1]).eval())"
 
 about:
   license: BSD-3-Clause
