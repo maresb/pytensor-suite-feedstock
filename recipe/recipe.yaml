@@ -13,14 +13,14 @@ source:
   sha256: 869354ef8f50b86e6441476f395b4e7ad2ab4df0c2c3639338743fab6c82b2fd
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.10") or win
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +82,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.10") or win
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
@@ -102,6 +102,12 @@ outputs:
             - ${{ compiler('c') }}
             - ${{ stdlib("c") }}
             - ${{ compiler('cxx') }}
+
+        # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
+        - if: osx
+          then:
+            # This is provided by c-compiler, but not compiler('c').
+            - ld64
 
         # mkl-service is only available for linux-64, win-64, and osx-64.
         # Use accelerate for osx-arm64.

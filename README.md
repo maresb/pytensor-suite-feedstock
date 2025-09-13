@@ -3,6 +3,23 @@ About pytensor-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pytensor-suite-feedstock/blob/main/LICENSE.txt)
 
+
+About pytensor
+--------------
+
+Home: https://github.com/pymc-devs/pytensor
+
+Package license: BSD-3-Clause
+
+Summary: An optimizing compiler for evaluating mathematical expressions.
+
+Development: https://github.com/pymc-devs/pytensor/
+
+Documentation: https://pytensor.readthedocs.io/en/latest/
+
+About pytensor-suite
+--------------------
+
 Home: https://github.com/pymc-devs/pytensor
 
 Package license: BSD-3-Clause
@@ -143,31 +160,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.10.____cpython</td>
+              <td>win_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18090&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pytensor-suite-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -185,6 +181,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-pytensor-green.svg)](https://anaconda.org/conda-forge/pytensor) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pytensor.svg)](https://anaconda.org/conda-forge/pytensor) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pytensor.svg)](https://anaconda.org/conda-forge/pytensor) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pytensor.svg)](https://anaconda.org/conda-forge/pytensor) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-pytensor--base-green.svg)](https://anaconda.org/conda-forge/pytensor-base) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pytensor-base.svg)](https://anaconda.org/conda-forge/pytensor-base) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pytensor-base.svg)](https://anaconda.org/conda-forge/pytensor-base) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pytensor-base.svg)](https://anaconda.org/conda-forge/pytensor-base) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pytensor--suite-green.svg)](https://anaconda.org/conda-forge/pytensor-suite) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pytensor-suite.svg)](https://anaconda.org/conda-forge/pytensor-suite) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pytensor-suite.svg)](https://anaconda.org/conda-forge/pytensor-suite) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pytensor-suite.svg)](https://anaconda.org/conda-forge/pytensor-suite) |
 
 Installing pytensor
 ===================
@@ -196,16 +193,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `pytensor, pytensor-base` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `pytensor, pytensor-base, pytensor-suite` can be installed with `conda`:
 
 ```
-conda install pytensor pytensor-base
+conda install pytensor pytensor-base pytensor-suite
 ```
 
 or with `mamba`:
 
 ```
-mamba install pytensor pytensor-base
+mamba install pytensor pytensor-base pytensor-suite
 ```
 
 It is possible to list all of the versions of `pytensor` available on your platform with `conda`:
