@@ -20,7 +20,7 @@ outputs:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.10") or win
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +82,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: match(python, "<3.10")
+      skip: match(python, "<3.10") or win
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
