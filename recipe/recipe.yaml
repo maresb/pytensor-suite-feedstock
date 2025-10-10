@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.32.0"
+  version: "2.34.0"
 
 recipe:
   # https://github.com/conda/conda-build/issues/3933
@@ -10,17 +10,17 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pytensor/pytensor-${{ version }}.tar.gz
-  sha256: 869354ef8f50b86e6441476f395b4e7ad2ab4df0c2c3639338743fab6c82b2fd
+  sha256: 834b87a3f2e1ec771c5d82489dd9bb828b3e82161ff3b320fb22b8366403eca0
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - package:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: match(python, "<3.10") or win
+      skip: win
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +82,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: match(python, "<3.10") or win
+      skip: win
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
