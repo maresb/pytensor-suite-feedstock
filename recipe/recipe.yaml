@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.34.0"
+  version: "2.35.0"
 
 recipe:
   # https://github.com/conda/conda-build/issues/3933
@@ -10,7 +10,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pytensor/pytensor-${{ version }}.tar.gz
-  sha256: 834b87a3f2e1ec771c5d82489dd9bb828b3e82161ff3b320fb22b8366403eca0
+  sha256: 736dc1af4ef2893b617f439aa4ec51fdfdc1bdcdbfa8af5249bbdfc06e3677d0
 
 build:
   number: 0
@@ -20,7 +20,7 @@ outputs:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: win
+      skip: win or match(python, "<3.11")
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +82,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: win
+      skip: win or match(python, "<3.11")
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
@@ -109,19 +109,16 @@ outputs:
             # This is provided by c-compiler, but not compiler('c').
             - ld64
 
-        # mkl-service is only available for linux-64, win-64, and osx-64.
-        # Use accelerate for osx-arm64.
-        # For everything else, use openblas.
+        # Pin BLAS provider per platform for consistency and performance.
+        # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
         - if: (linux and x86_64) or win or (osx and not arm64)
-          then: mkl-service
+          then:
+            - blas * mkl
+            - mkl-service
         - if: osx and arm64
-          then: accelerate
+          then: blas * accelerate
         - if: not ((linux and x86_64) or win or osx)
-          then: openblas
-        # For some reason we also need the "blas" package. Otherwise we get reports
-        # of "cblas.h: No such file or directory" at import time.
-        # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
-        - blas
+          then: blas * openblas
       run_constraints:
         - if: win
           then:
