@@ -117,7 +117,7 @@ outputs:
         - if: osx and arm64
           then: accelerate
         - if: not ((linux and x86_64) or win or osx)
-          then: openblas
+          then: blas * openblas
         # For some reason we also need the "blas" package. Otherwise we get reports
         # of "cblas.h: No such file or directory" at import time.
         # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
