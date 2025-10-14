@@ -109,19 +109,16 @@ outputs:
             # This is provided by c-compiler, but not compiler('c').
             - ld64
 
-        # mkl-service is only available for linux-64, win-64, and osx-64.
-        # Use accelerate for osx-arm64.
-        # For everything else, use openblas.
+        # Pin BLAS provider per platform for consistency and performance.
+        # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
         - if: (linux and x86_64) or win or (osx and not arm64)
-          then: mkl-service
+          then:
+            - blas * mkl
+            - mkl-service
         - if: osx and arm64
-          then: accelerate
+          then: blas * accelerate
         - if: not ((linux and x86_64) or win or osx)
           then: blas * openblas
-        # For some reason we also need the "blas" package. Otherwise we get reports
-        # of "cblas.h: No such file or directory" at import time.
-        # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
-        - blas
       run_constraints:
         - if: win
           then:
