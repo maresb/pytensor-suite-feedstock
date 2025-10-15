@@ -11,16 +11,18 @@ recipe:
 source:
   url: https://pypi.org/packages/source/p/pytensor/pytensor-${{ version }}.tar.gz
   sha256: 736dc1af4ef2893b617f439aa4ec51fdfdc1bdcdbfa8af5249bbdfc06e3677d0
+  patches:
+    - fix-mkl-blas-detection.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
       name: pytensor-base
     build:
       # NOTE: Keep this line synchronized with the identical one below.
-      skip: win or match(python, "<3.11")
+      skip: match(python, "<3.11")
       script:
         - python -m pip install . --no-deps -vv
       python:
@@ -82,7 +84,7 @@ outputs:
       name: pytensor
     build:
       # NOTE: Keep this line synchronized with the identical one above.
-      skip: win or match(python, "<3.11")
+      skip: match(python, "<3.11")
       script:
         - "echo \"Nothing to build here, just add dependencies.\""
     requirements:
