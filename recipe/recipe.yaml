@@ -15,7 +15,7 @@ source:
     - fix-mkl-blas-detection.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
