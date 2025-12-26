@@ -103,7 +103,6 @@ outputs:
             - ${{ compiler('m2w64_cxx') }}
           else:
             - ${{ compiler('c') }}
-            - ${{ stdlib("c") }}
             - ${{ compiler('cxx') }}
 
         # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
