@@ -93,22 +93,24 @@ outputs:
       run:
         - python
         - ${{ pin_subpackage('pytensor-base', exact=True) }}
-        - if: linux or win
-          then: gxx
-        - if: win
+        # Runtime compilers for JIT compilation of C++ code at runtime.
+        # We use unpinned package names instead of ${{ compiler() }} macros
+        # to avoid overly tight version constraints that cause solver conflicts.
+        - if: linux
           then:
-            - ${{ compiler('m2w64_c') }}
-            - ${{ stdlib('m2w64_c') }}
-            - ${{ compiler('m2w64_cxx') }}
-          else:
-            - ${{ compiler('c') }}
-            - ${{ compiler('cxx') }}
-
-        # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
+            - gxx
+            - gcc_${{ target_platform }}
+            - gxx_${{ target_platform }}
         - if: osx
           then:
+            - clang_${{ target_platform }}
+            - clangxx_${{ target_platform }}
             # This is provided by c-compiler, but not compiler('c').
             - ld64
+        - if: win
+          then:
+            - m2w64-gcc
+            - m2w64-gcc-fortran
 
         # Pin BLAS provider per platform for consistency and performance.
         # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
