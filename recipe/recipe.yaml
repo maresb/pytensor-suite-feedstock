@@ -30,9 +30,8 @@ outputs:
           - pytensor-cache = pytensor.bin.pytensor_cache:main
     requirements:
       build:
-        - ${{ compiler('c') }}
-        - ${{ stdlib("c") }}
-        - ${{ compiler('cxx') }}
+        # NOTE: Compilers are NOT needed at build time for pytensor-base.
+        # The package only contains Python code that generates C++ at runtime.
         - if: build_platform != target_platform
           then:
             - python
