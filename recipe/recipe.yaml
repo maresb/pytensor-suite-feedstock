@@ -96,13 +96,10 @@ outputs:
         - ${{ pin_subpackage('pytensor-base', exact=True) }}
 
         # PyTensor's C backend requires a C++ compiler at runtime
-        - if: linux
+        - if: linux or win
           then:
             - gxx_${{ target_platform }}
             - gxx
-        - if: win
-          then:
-            - gxx_${{ target_platform }}
         - if: osx
           then:
             - clangxx_${{ target_platform }}
