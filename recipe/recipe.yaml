@@ -96,8 +96,12 @@ outputs:
         - ${{ pin_subpackage('pytensor-base', exact=True) }}
 
         # PyTensor's C backend requires a C++ compiler at runtime
-        - gxx_${{ target_platform }}      # [linux or win]
-        - clangxx_${{ target_platform }}  # [osx]
+        - if: linux or win
+          then:
+            - gxx_${{ target_platform }}
+        - if: osx
+          then:
+            - clangxx_${{ target_platform }}
 
         # Pin BLAS provider per platform for consistency and performance.
         # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
