@@ -30,9 +30,10 @@ outputs:
           - pytensor-cache = pytensor.bin.pytensor_cache:main
     requirements:
       build:
-        - ${{ compiler('c') }}
-        - ${{ stdlib("c") }}
+        # For performant scans, a C++ compiler is required
+        # at build time so that cython can compile pytensor/scan/scan_perform.pyx
         - ${{ compiler('cxx') }}
+
         - if: build_platform != target_platform
           then:
             - python
