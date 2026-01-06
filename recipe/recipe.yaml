@@ -94,23 +94,10 @@ outputs:
       run:
         - python
         - ${{ pin_subpackage('pytensor-base', exact=True) }}
-        - if: linux or win
-          then: gxx
-        - if: win
-          then:
-            - ${{ compiler('m2w64_c') }}
-            - ${{ stdlib('m2w64_c') }}
-            - ${{ compiler('m2w64_cxx') }}
-          else:
-            - ${{ compiler('c') }}
-            - ${{ stdlib("c") }}
-            - ${{ compiler('cxx') }}
 
-        # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
-        - if: osx
-          then:
-            # This is provided by c-compiler, but not compiler('c').
-            - ld64
+        # PyTensor's C backend requires a C++ compiler at runtime
+        - gxx_${{ target_platform }}      # [linux or win]
+        - clangxx_${{ target_platform }}  # [osx]
 
         # Pin BLAS provider per platform for consistency and performance.
         # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
