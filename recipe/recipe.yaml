@@ -103,6 +103,7 @@ outputs:
         - if: osx
           then:
             - clangxx_${{ target_platform }}
+            - clangxx
 
         # Pin BLAS provider per platform for consistency and performance.
         # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
