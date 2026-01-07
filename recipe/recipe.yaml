@@ -142,6 +142,7 @@ outputs:
           - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
           - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
           - python check-for-warnings.py allowed-warnings-main.txt
+          - python -c "import pytensor; import pytensor.tensor as pt; x = pt.dscalar(); f = pytensor.function([x], x + 1, mode=pytensor.compile.mode.Mode(linker='c')); print(f(5.0))"
 
 about:
   license: BSD-3-Clause
