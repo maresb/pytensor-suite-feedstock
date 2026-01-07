@@ -303,5 +303,6 @@ Feedstock Maintainers
 * [@aseyboldt](https://github.com/aseyboldt/)
 * [@maresb](https://github.com/maresb/)
 * [@michaelosthege](https://github.com/michaelosthege/)
+* [@ricardoV94](https://github.com/ricardoV94/)
 * [@twiecki](https://github.com/twiecki/)
 
