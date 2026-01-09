@@ -98,11 +98,9 @@ outputs:
         # PyTensor's C backend requires a C++ compiler at runtime
         - if: linux or win
           then:
-            - gxx_${{ target_platform }}
             - gxx
         - if: osx
           then:
-            - clangxx_${{ target_platform }}
             - clangxx
 
         # Pin BLAS provider per platform for consistency and performance.
