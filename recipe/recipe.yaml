@@ -15,7 +15,7 @@ source:
     - fix-mkl-blas-detection.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -94,23 +94,14 @@ outputs:
       run:
         - python
         - ${{ pin_subpackage('pytensor-base', exact=True) }}
-        - if: linux or win
-          then: gxx
-        - if: win
-          then:
-            - ${{ compiler('m2w64_c') }}
-            - ${{ stdlib('m2w64_c') }}
-            - ${{ compiler('m2w64_cxx') }}
-          else:
-            - ${{ compiler('c') }}
-            - ${{ stdlib("c") }}
-            - ${{ compiler('cxx') }}
 
-        # Trying to solve <https://github.com/pymc-devs/pytensor/issues/1342>
+        # PyTensor's C backend requires a C++ compiler at runtime
+        - if: linux or win
+          then:
+            - gxx
         - if: osx
           then:
-            # This is provided by c-compiler, but not compiler('c').
-            - ld64
+            - clangxx
 
         # Pin BLAS provider per platform for consistency and performance.
         # MKL for x86_64 platforms, Accelerate for macOS arm64, OpenBLAS elsewhere.
@@ -150,6 +141,7 @@ outputs:
           - python -c "import pytensor; print(pytensor.config.blas__ldflags); print(pytensor.config)"
           - python -c "import pytensor; assert pytensor.config.blas__ldflags != '', 'Blas flags are empty'"
           - python check-for-warnings.py allowed-warnings-main.txt
+          - python -c "from pytensor.tensor import scalar; scalar('x').exp().eval({'x': 0}, mode='C')"
 
 about:
   license: BSD-3-Clause
